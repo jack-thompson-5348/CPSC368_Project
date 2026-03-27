@@ -1,0 +1,1 @@
+All of the files used for the loading of data into OracleDB and vizualization can be found in this folder. This includes all work for phase 3
