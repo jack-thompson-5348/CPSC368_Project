@@ -1,6 +1,8 @@
 import pymongo
 import pandas as pd
 import math
+#using for charts
+import altair as alt
 
 # Connect to MongoDB
 CWL = "jthomp20"
@@ -129,5 +131,36 @@ comparison_2022.columns = ["rank_group", "avg_weeks_on_chart"]
 
 print("\n2022 comparison table:")
 print(comparison_2022)
+
+# +
+df_melt = results_df.melt(
+    id_vars='year', 
+    value_vars=['top_25_share', 'top_10_share'],
+    var_name='Category', 
+    value_name='Percentage'
+)
+
+
+chart = alt.Chart(df_melted).mark_bar().encode(
+    x=alt.X('year:O', title='Year'),
+    y=alt.Y('Percentage:Q', title='Concentration of Streams(%)', stack=None), 
+    color=alt.Color('Category:N', 
+                    scale=alt.Scale(range=['#ff7f0e', '#1f77b4']),
+                    legend=alt.Legend(title="Percentile")),
+    size=alt.condition(
+        alt.datum.Category == 'top_10_share',
+        alt.value(25), 
+        alt.value(45)  
+    ),
+    tooltip=['year', 'Category', 'Percentage']
+).properties(
+    width=400,
+    title='Concentration of Total Streams Over Time (%)'
+)
+
+chart.display()
+# -
+
+df_melt
 
 
