@@ -129,3 +129,5 @@ comparison_2022.columns = ["rank_group", "avg_weeks_on_chart"]
 
 print("\n2022 comparison table:")
 print(comparison_2022)
+
+

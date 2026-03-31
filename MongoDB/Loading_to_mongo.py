@@ -77,7 +77,7 @@ for _, row in data_2023.iterrows():
         "metrics": {
             "peak_rank": None,
             "weeks_on_chart": None,
-            "streams": ['streams']
+            "streams": row['streams']
         }
     })
 
@@ -101,7 +101,7 @@ for _, row in data_2024.iterrows():
 
 # In[9]:
 
-
+db.delete_many({})
 #inserting songs_to_insert into MongoDB
 if songs_to_insert:
     result = db.insert_many(songs_to_insert)
